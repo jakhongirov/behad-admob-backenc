@@ -10,8 +10,7 @@ module.exports = {
             const currentDate = new Date
             const currentHours = Number(currentDate.getHours())
             const currentDay = Number(currentDate.getDate())
-
-
+            const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
             if (foundUser) {
                 const foundAd = await model.foundAd(foundUser.user_age, foundUser.user_who, foundUser.user_country, foundUser.user_capital, foundUser.user_phone_lang, type,)

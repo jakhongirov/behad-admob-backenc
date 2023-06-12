@@ -21,15 +21,15 @@ const CHOOSE_ALL = `
 `;
 
 const FOUND_APP = `
-        SELECT 
-           *
-        FROM   
-            apps_side
-        WHERE
-             $1 = ANY (banner_id) or
-             $1 = ANY (inters_id) or
-             $1 = ANY (rewarded_id) or
-             $1 = ANY (native_banner_id);
+    SELECT 
+       *
+    FROM   
+        apps_side
+    WHERE
+        $1 = ANY (banner_id) or
+        $1 = ANY (inters_id) or
+        $1 = ANY (rewarded_id) or
+        $1 = ANY (native_banner_id);
 `;
 
 const UPDATE_STATUS_AD = `
@@ -44,7 +44,7 @@ const UPDATE_STATUS_AD = `
 
 const FOUND_APP_RESULT = `
     SELECT
-        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'HH24,MM,DD')::INT
+        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'HH24,MM,DD') as date
     FROM
         action_result
     WHERE
