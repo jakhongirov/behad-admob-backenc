@@ -117,5 +117,6 @@ module.exports = {
     foundApp,
     updateStatusAd,
     addAppResultRequest,
-    updateAppResultRequest
+    updateAppResultRequest,
+    foundAppResult
 }
