@@ -42,6 +42,18 @@ const UPDATE_STATUS_AD = `
     RETURNING *;
 `;
 
+const FOUND_APP_RESULT = `
+    SELECT
+        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'HH24,MM,DD')::INT
+    FROM
+        action_result
+    WHERE
+        app_ads_id = $1
+    ORDER BY
+        action_result_create_date DESC
+    LIMIT 1;
+`;
+
 const ADD_APP_RESULT_REQUEST = `
     INSERT INTO 
         action_result (
@@ -93,6 +105,7 @@ const foundAd = (age, who, country, city, phone_lang, type) => {
 }
 const chooseAllAd = (type) => fetch(CHOOSE_ALL, type)
 const foundApp = (adId) => fetch(FOUND_APP, adId)
+const foundAppResult = (adId) => fetch(FOUND_APP_RESULT, app_ads_id)
 const updateStatusAd = (campaign_id) => fetch(UPDATE_STATUS_AD, campaign_id)
 const addAppResultRequest = (time, app_ads_id, user_id) => fetch(ADD_APP_RESULT_REQUEST, time, app_ads_id, user_id)
 const updateAppResultRequest = (app_ads_id, user_id) => fetch(UPDATE_APP_RESULT_REQUEST, app_ads_id, user_id)

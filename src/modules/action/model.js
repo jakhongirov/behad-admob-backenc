@@ -29,7 +29,8 @@ const FOUND_CAMPAIGN = `
     WHERE
         campaign_id = $1
     ORDER BY
-        action_result_create_date DESC;
+        action_result_create_date DESC
+    LIMIT 1;
 `;
 
 const FOUND_APP_RESULT = `
@@ -40,7 +41,8 @@ const FOUND_APP_RESULT = `
     WHERE
         app_ads_id = $1
     ORDER BY
-        action_result_create_date DESC;
+        action_result_create_date DESC
+    LIMIT 1;
 `;
 
 const UPDATE_CTR = `
