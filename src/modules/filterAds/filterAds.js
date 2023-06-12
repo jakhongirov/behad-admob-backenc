@@ -6,7 +6,7 @@ module.exports = {
             const { type, deviceId, adId } = req.query
             const foundUser = await model.foundUser(deviceId)
             const app = await model.foundApp(adId)
-            const findApp = await model.foundAppResult(app_ads_id)
+            const findApp = await model.foundAppResult(adId)
             const currentDate = new Date
             const currentHours = Number(currentDate.getHours())
             const currentDay = Number(currentDate.getDate())
@@ -41,9 +41,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
                                     currentHours += 23
@@ -53,9 +53,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 }
                             } else {
@@ -63,7 +63,7 @@ module.exports = {
                                 let time = `
                                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                                 `
-                                await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                await model.addAppResultRequest(time, adId, deviceId)
                             }
 
                             return res.json({
@@ -109,9 +109,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
                                     currentHours += 23
@@ -121,9 +121,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 }
                             } else {
@@ -131,7 +131,7 @@ module.exports = {
                                 let time = `
                                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                                 `
-                                await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                await model.addAppResultRequest(time, adId, deviceId)
                             }
 
                             return res.json({
@@ -177,9 +177,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
                                     currentHours += 23
@@ -189,9 +189,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 }
                             } else {
@@ -199,7 +199,7 @@ module.exports = {
                                 let time = `
                                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                                 `
-                                await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                await model.addAppResultRequest(time, adId, deviceId)
                             }
 
                             return res.json({
@@ -248,9 +248,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
                                     currentHours += 23
@@ -260,9 +260,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 }
                             } else {
@@ -270,7 +270,7 @@ module.exports = {
                                 let time = `
                                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                                 `
-                                await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                await model.addAppResultRequest(time, adId, deviceId)
                             }
                             return res.json({
                                 status: 200,
@@ -314,9 +314,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
                                     currentHours += 23
@@ -326,9 +326,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 }
                             } else {
@@ -336,7 +336,7 @@ module.exports = {
                                 let time = `
                                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                                 `
-                                await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                await model.addAppResultRequest(time, adId, deviceId)
                             }
                             return res.json({
                                 status: 200,
@@ -380,9 +380,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
                                     currentHours += 23
@@ -392,9 +392,9 @@ module.exports = {
                                         let time = `
                                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                         `
-                                        await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                        await model.addAppResultRequest(time, adId, deviceId)
                                     } else {
-                                        await model.updateAppResultRequest(app_ads_id, deviceId)
+                                        await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 }
                             } else {
@@ -402,7 +402,7 @@ module.exports = {
                                 let time = `
                                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                                 `
-                                await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                await model.addAppResultRequest(time, adId, deviceId)
                             }
                             return res.json({
                                 status: 200,
@@ -451,9 +451,9 @@ module.exports = {
                                     let time = `
                                         ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                     `
-                                    await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                    await model.addAppResultRequest(time, adId, deviceId)
                                 } else {
-                                    await model.updateAppResultRequest(app_ads_id, deviceId)
+                                    await model.updateAppResultRequest(adId, deviceId)
                                 }
                             } else {
                                 currentHours += 23
@@ -463,9 +463,9 @@ module.exports = {
                                     let time = `
                                         ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                     `
-                                    await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                    await model.addAppResultRequest(time, adId, deviceId)
                                 } else {
-                                    await model.updateAppResultRequest(app_ads_id, deviceId)
+                                    await model.updateAppResultRequest(adId, deviceId)
                                 }
                             }
                         } else {
@@ -473,7 +473,7 @@ module.exports = {
                             let time = `
                                     ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                             `
-                            await model.addAppResultRequest(time, app_ads_id, deviceId)
+                            await model.addAppResultRequest(time, adId, deviceId)
                         }
                         return res.json({
                             status: 200,
@@ -517,9 +517,9 @@ module.exports = {
                                     let time = `
                                         ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                     `
-                                    await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                    await model.addAppResultRequest(time, adId, deviceId)
                                 } else {
-                                    await model.updateAppResultRequest(app_ads_id, deviceId)
+                                    await model.updateAppResultRequest(adId, deviceId)
                                 }
                             } else {
                                 currentHours += 23
@@ -529,9 +529,9 @@ module.exports = {
                                     let time = `
                                         ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                     `
-                                    await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                    await model.addAppResultRequest(time, adId, deviceId)
                                 } else {
-                                    await model.updateAppResultRequest(app_ads_id, deviceId)
+                                    await model.updateAppResultRequest(adId, deviceId)
                                 }
                             }
                         } else {
@@ -539,7 +539,7 @@ module.exports = {
                             let time = `
                                     ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                             `
-                            await model.addAppResultRequest(time, app_ads_id, deviceId)
+                            await model.addAppResultRequest(time, adId, deviceId)
                         }
                         return res.json({
                             status: 200,
@@ -584,9 +584,9 @@ module.exports = {
                                     let time = `
                                         ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                     `
-                                    await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                    await model.addAppResultRequest(time, adId, deviceId)
                                 } else {
-                                    await model.updateAppResultRequest(app_ads_id, deviceId)
+                                    await model.updateAppResultRequest(adId, deviceId)
                                 }
                             } else {
                                 currentHours += 23
@@ -596,9 +596,9 @@ module.exports = {
                                     let time = `
                                         ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                                     `
-                                    await model.addAppResultRequest(time, app_ads_id, deviceId)
+                                    await model.addAppResultRequest(time, adId, deviceId)
                                 } else {
-                                    await model.updateAppResultRequest(app_ads_id, deviceId)
+                                    await model.updateAppResultRequest(adId, deviceId)
                                 }
                             }
                         } else {
@@ -606,7 +606,7 @@ module.exports = {
                             let time = `
                                     ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                             `
-                            await model.addAppResultRequest(time, app_ads_id, deviceId)
+                            await model.addAppResultRequest(time, adId, deviceId)
                         }
 
                         return res.json({

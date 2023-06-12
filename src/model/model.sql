@@ -63,20 +63,9 @@ CREATE TABLE advertisements (
     advertising_id int not null REFERENCES users_ads(user_id) ON DELETE CASCADE,
     advertisement_active BOOLEAN DEFAULT false,
     advertisement_action_text text,
-    advertisement_app_id number [],
+    advertisement_app_id int [],
     advertisement_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
 );
-
--- CREATE TABLE action_temp (
---     action_temp_id bigserial PRiMARY KEY,
---     app_id int not null REFERENCES apps_side(app_id) ON DELETE CASCADE,
---     app_ads_id text not null,
---     campaign_id int not null REFERENCES advertisements(campaign_id) ON DELETE CASCADE,
---     actions int not null,
---     action_price DOUBLE PRECISION not null,
---     user_id text not null,
---     action_temp_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
--- );
 
 CREATE TABLE action_result (
     action_result_id bigserial PRiMARY KEY,
@@ -103,3 +92,14 @@ CREATE TABLE action_result_campaign (
     user_id text [],
     action_result_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
 );
+
+-- CREATE TABLE action_temp (
+--     action_temp_id bigserial PRiMARY KEY,
+--     app_id int not null REFERENCES apps_side(app_id) ON DELETE CASCADE,
+--     app_ads_id text not null,
+--     campaign_id int not null REFERENCES advertisements(campaign_id) ON DELETE CASCADE,
+--     actions int not null,
+--     action_price DOUBLE PRECISION not null,
+--     user_id text not null,
+--     action_temp_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
+-- );
