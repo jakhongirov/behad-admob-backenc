@@ -105,10 +105,10 @@ const foundAd = (age, who, country, city, phone_lang, type) => {
 }
 const chooseAllAd = (type) => fetch(CHOOSE_ALL, type)
 const foundApp = (adId) => fetch(FOUND_APP, adId)
-const foundAppResult = (adId) => fetch(FOUND_APP_RESULT, app_ads_id)
+const foundAppResult = (adId) => fetch(FOUND_APP_RESULT, adId)
 const updateStatusAd = (campaign_id) => fetch(UPDATE_STATUS_AD, campaign_id)
-const addAppResultRequest = (time, app_ads_id, user_id) => fetch(ADD_APP_RESULT_REQUEST, time, app_ads_id, user_id)
-const updateAppResultRequest = (app_ads_id, user_id) => fetch(UPDATE_APP_RESULT_REQUEST, app_ads_id, user_id)
+const addAppResultRequest = (time, adId, user_id) => fetch(ADD_APP_RESULT_REQUEST, time, adId, user_id)
+const updateAppResultRequest = (adId, user_id) => fetch(UPDATE_APP_RESULT_REQUEST, adId, user_id)
 
 module.exports = {
     foundUser,
