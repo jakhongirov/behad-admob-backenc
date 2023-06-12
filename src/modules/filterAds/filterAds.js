@@ -17,7 +17,7 @@ module.exports = {
                 const foundAd = await model.foundAd(foundUser.user_age, foundUser.user_who, foundUser.user_country, foundUser.user_capital, foundUser.user_phone_lang, type,)
 
                 if (foundAd) {
-                    if (foundAd.type_of_campaign.toLowerCase() === 'view') {
+                    if (foundAd?.type_of_campaign.toLowerCase() === 'view') {
                         let result = 0
 
                         if (foundAd.view && foundAd.view.length > 0) {
@@ -85,7 +85,7 @@ module.exports = {
                                 message: "No Content"
                             })
                         }
-                    } else if (foundAd.type_of_campaign.toLowerCase() === 'click') {
+                    } else if (foundAd?.type_of_campaign.toLowerCase() === 'click') {
                         let result = 0
 
                         if (foundAd.click && foundAd.click.length > 0) {
@@ -153,7 +153,7 @@ module.exports = {
                                 message: "No Content"
                             })
                         }
-                    } else if (foundAd.type_of_campaign.toLowerCase() === 'fullView') {
+                    } else if (foundAd?.type_of_campaign.toLowerCase() === 'fullView') {
                         let result = 0
 
                         if (foundAd.full_view && foundAd.full_view.length > 0) {
@@ -225,7 +225,7 @@ module.exports = {
                 } else {
                     const chooseAllAd = await model.chooseAllAd(type)
 
-                    if (chooseAllAd.type_of_campaign.toLowerCase() === 'view') {
+                    if (chooseAllAd?.type_of_campaign.toLowerCase() === 'view') {
                         let result = 0
 
                         if (chooseAllAd.view && chooseAllAd.view.length > 0) {
@@ -291,7 +291,7 @@ module.exports = {
                                 message: "No Content"
                             })
                         }
-                    } else if (chooseAllAd.type_of_campaign.toLowerCase() === 'click') {
+                    } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'click') {
                         let result = 0
 
                         if (chooseAllAd.click && chooseAllAd.click.length > 0) {
@@ -357,7 +357,7 @@ module.exports = {
                                 message: "No Content"
                             })
                         }
-                    } else if (chooseAllAd.type_of_campaign.toLowerCase() === 'fullView') {
+                    } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'fullView') {
                         let result = 0
 
                         if (chooseAllAd.full_view && chooseAllAd.full_view.length > 0) {
@@ -428,7 +428,7 @@ module.exports = {
             } else {
                 const chooseAllAd = await model.chooseAllAd(type)
 
-                if (chooseAllAd.type_of_campaign.toLowerCase() === 'view') {
+                if (chooseAllAd?.type_of_campaign.toLowerCase() === 'view') {
                     let result = 0
 
                     if (chooseAllAd.view && chooseAllAd.view.length > 0) {
@@ -494,7 +494,7 @@ module.exports = {
                             message: "No Content"
                         })
                     }
-                } else if (chooseAllAd.type_of_campaign.toLowerCase() === 'click') {
+                } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'click') {
                     let result = 0
 
                     if (chooseAllAd.click && chooseAllAd.click.length > 0) {
@@ -560,7 +560,7 @@ module.exports = {
                             message: "No Content"
                         })
                     }
-                } else if (chooseAllAd.type_of_campaign.toLowerCase() === 'fullView') {
+                } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'fullView') {
                     let result = 0
 
                     if (chooseAllAd.full_view && chooseAllAd.full_view.length > 0) {
