@@ -28,7 +28,6 @@ module.exports = {
             const ad = await model.foundAds(campaign_id)
             const findCampaign = await model.foundCampaign(campaign_id)
             const findApp = await model.foundAppResult(app_ads_id)
-            console.log(findApp);
             let price = 0;
             const currentDate = new Date
             const currentHours = Number(currentDate.getHours())
@@ -52,9 +51,8 @@ module.exports = {
                     const calculateTime = Number(currentHours - lastHour)
 
                     if (calculateTime >= 3) {
-                        let time = `
-                            ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
-                        `
+                        let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
+
                         const calculateCTR = Math.floor((findCampaign.clicks_count / findCampaign.views_count) * 100)
                         await model.updateCampaignCtr(campaign_id, calculateCTR)
 
@@ -98,33 +96,31 @@ module.exports = {
                     let hours = currentHours + 23
                     const calculateTime = hours - lastHour
 
-                    const calculateCTR = Math.floor((findCampaign.clicks_count / findCampaign.views_count) * 100)
-                    await model.updateCampaignCtr(campaign_id, calculateCTR)
-
-
-                    const actionResultCampaign = await model.actionResultCampaign()
-
-                    for (let i = 0; i < actionResultCampaign.length; i++) {
-                        let view = {}
-                        let click = {}
-                        let fullView = {}
-
-                        view['time'] = time
-                        view['count'] = actionResultCampaign[i].views
-
-                        click['time'] = time
-                        click['count'] = actionResultCampaign[i].click
-
-                        fullView['time'] = time
-                        fullView['count'] = actionResultCampaign[i].full_views
-
-                        await model.updateAdsCount(actionResultCampaign[i].campaign_id, view, click, fullView)
-                    }
-
                     if (calculateTime >= 3) {
-                        let time = `
-                            ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
-                        `
+                        let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
+
+                        const calculateCTR = Math.floor((findCampaign.clicks_count / findCampaign.views_count) * 100)
+                        await model.updateCampaignCtr(campaign_id, calculateCTR)
+
+                        const actionResultCampaign = await model.actionResultCampaign()
+
+                        for (let i = 0; i < actionResultCampaign.length; i++) {
+                            let view = {}
+                            let click = {}
+                            let fullView = {}
+
+                            view['time'] = time
+                            view['count'] = actionResultCampaign[i].views
+
+                            click['time'] = time
+                            click['count'] = actionResultCampaign[i].click
+
+                            fullView['time'] = time
+                            fullView['count'] = actionResultCampaign[i].full_views
+
+                            await model.updateAdsCount(actionResultCampaign[i].campaign_id, view, click, fullView)
+                        }
+
                         if (action == 2) {
                             await model.addCampaignResultView(time, campaign_id, price, user_id)
                         } else if (action == 3) {
@@ -146,9 +142,8 @@ module.exports = {
                 }
             } else {
                 const lastHour = Number(currentHours) + 3
-                let time = `
-                        ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
-                    `
+                let time = `${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}`
+
                 if (action == 2) {
                     await model.addCampaignResultView(time, campaign_id, price, user_id)
                 } else if (action == 3) {
@@ -163,15 +158,12 @@ module.exports = {
                 const lastHour = Number(lastDate[0])
                 const lastMonth = Number(lastDate[1] - 1)
                 const lastDay = Number(lastDate[2])
-                console.log(lastDate);
 
                 if (currentDay == lastDay) {
                     const calculateTime = Number(currentHours - lastHour)
 
                     if (calculateTime >= 3) {
-                        let time = `
-                            ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
-                         `
+                        let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
 
                         if (action == 2) {
                             const addAppResultView = await model.addAppResultView(time, app_ads_id, price, user_id)
@@ -265,9 +257,7 @@ module.exports = {
                 } else {
                     let hours = currentHours + 23
                     const calculateTime = hours - lastHour
-                    let time = `
-                            ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
-                         `
+                    let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
 
                     if (calculateTime >= 3) {
                         if (action == 2) {
@@ -362,9 +352,7 @@ module.exports = {
 
             } else {
                 const lastHour = Number(currentHours) + 3
-                let time = `
-                        ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
-                    `
+                let time = `${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}`
                 if (action == 2) {
                     const addAppResultView = await model.addAppResultView(time, app_ads_id, price, user_id)
 
