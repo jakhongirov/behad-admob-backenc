@@ -104,7 +104,7 @@ const foundAd = (age, who, country, city, phone_lang, type, app_id) => {
 
     return fetch(FOUND_AD)
 }
-const chooseAllAd = (type, app_id) => fetch(CHOOSE_ALL, type)
+const chooseAllAd = (type, app_id) => fetch(CHOOSE_ALL, type, app_id)
 const foundApp = (adId) => fetch(FOUND_APP, adId)
 const foundAppResult = (adId) => fetch(FOUND_APP_RESULT, adId)
 const updateStatusAd = (campaign_id) => fetch(UPDATE_STATUS_AD, campaign_id)

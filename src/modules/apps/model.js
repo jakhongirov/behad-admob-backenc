@@ -107,6 +107,16 @@ const FOUND_USER = `
             user_id =$1;
 `;
 
+const APP_LIST = `
+    SELECT
+        app_id,
+        app_name
+    FROM
+        apps_side
+    ORDER BY'
+        app_id
+`
+
 const allApps = () => fetchALL(ALL_APPS);
 const appsById = (appId) => fetchALL(BY_ID, appId)
 const appsByOffset = (offset) => {
@@ -167,7 +177,7 @@ const appsByUserId = (userId, offset) => {
             app_id DESC
         OFFSET ${offset}
         LIMIT 50;
-    `;                      
+    `;
 
     return fetchALL(APPS_BY_USER_ID)
 };
@@ -177,6 +187,7 @@ const updateStatus = (app_id, category_id, status) => fetch(UPDATE_APP_STATUS, a
 const deleteApp = (app_id) => fetch(DELETE_APP, app_id)
 const foundUser = (userId) => fetch(FOUND_USER, userId)
 const getAppResult = (appId) => fetch(BY_ID_EARNING, appId)
+const appList = () => fetchALL(APP_LIST)
 
 module.exports = {
     allApps,

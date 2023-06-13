@@ -23,7 +23,7 @@ const FOUND_ADS = `
 
 const FOUND_CAMPAIGN = `
     SELECT
-        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'HH24,MM,DD') as date
+        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'MI,MM,DD') as date
     FROM
         action_result_campaign
     WHERE
@@ -35,7 +35,7 @@ const FOUND_CAMPAIGN = `
 
 const FOUND_APP_RESULT = `
     SELECT
-        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'HH24,MM,DD') as date
+        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'MI,MM,DD') as date
     FROM
         action_result
     WHERE

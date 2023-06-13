@@ -31,6 +31,7 @@ module.exports = {
             let price = 0;
             const currentDate = new Date
             const currentHours = Number(currentDate.getHours())
+            const currentMinutes = Number(currentDate.getMinutes())
             const currentDay = Number(currentDate.getDate())
 
             if (action == 2 && ad.type_of_campaign.toLowerCase() === 'view') {
@@ -48,7 +49,7 @@ module.exports = {
                 const lastDay = Number(lastDate[2])
 
                 if (currentDay == lastDay) {
-                    const calculateTime = Number(currentHours - lastHour)
+                    const calculateTime = Number(currentMinutes - lastHour)
 
                     if (calculateTime >= 3) {
                         let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
@@ -93,7 +94,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    let hours = currentHours + 23
+                    let hours = currentMinutes + 59
                     const calculateTime = hours - lastHour
 
                     if (calculateTime >= 3) {
@@ -160,7 +161,7 @@ module.exports = {
                 const lastDay = Number(lastDate[2])
 
                 if (currentDay == lastDay) {
-                    const calculateTime = Number(currentHours - lastHour)
+                    const calculateTime = Number(currentMinutes - lastHour)
 
                     if (calculateTime >= 3) {
                         let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
@@ -255,7 +256,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    let hours = currentHours + 23
+                    let hours = currentMinutes + 59
                     const calculateTime = hours - lastHour
                     let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
 

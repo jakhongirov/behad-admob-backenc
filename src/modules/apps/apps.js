@@ -262,9 +262,35 @@ module.exports = {
         }
     },
 
+    GET_LIST: async (_, res) => {
+        try {
+            const appList = await model.appList()
+
+            if (appList) {
+                return res.json({
+                    status: 200,
+                    message: "Success",
+                    data: appList
+                })
+            } else {
+                return res.json({
+                    status: 404,
+                    message: "Not found"
+                })
+            }
+
+        } catch (error) {
+            console.log(error)
+            res.json({
+                status: 500,
+                message: "Internal Server Error",
+            })
+        }
+    },
+
     GET_RESULT: async (req, res) => {
         try {
-            const { appId } = req.body
+            const { appId } = req.query
             const result = await model.getAppResult(appId)
 
             if (result) {
