@@ -28,6 +28,7 @@ module.exports = {
             const ad = await model.foundAds(campaign_id)
             const findCampaign = await model.foundCampaign(campaign_id)
             const findApp = await model.foundAppResult(app_ads_id)
+            console.log(findApp);
             let price = 0;
             const currentDate = new Date
             const currentHours = Number(currentDate.getHours())
@@ -77,97 +78,25 @@ module.exports = {
                         }
 
                         if (action == 2) {
-                            const addCampaignResultView = await model.addCampaignResultView(time, campaign_id, price, user_id)
-
-                            if (addCampaignResultView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.addCampaignResultView(time, campaign_id, price, user_id)
                         } else if (action == 3) {
-                            const addCampaignResultClick = await model.addCampaignResultClick(time, campaign_id, price, user_id)
-
-                            if (addCampaignResultClick) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.addCampaignResultClick(time, campaign_id, price, user_id)
                         } else if (action == 4) {
-                            const addCampaignResultFullView = await model.addCampaignResultFullView(time, campaign_id, price, user_id)
-
-                            if (addCampaignResultFullView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.addCampaignResultFullView(time, campaign_id, price, user_id)
                         }
                     } else {
 
                         if (action == 2) {
-                            const updateCampaignResultView = await model.updateCampaignResultView(campaign_id, price, user_id)
-
-                            if (updateCampaignResultView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.updateCampaignResultView(campaign_id, price, user_id)
                         } else if (action == 3) {
-                            const updateCampaignResultClick = await model.updateCampaignResultClick(campaign_id, price, user_id)
-
-                            if (updateCampaignResultClick) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.updateCampaignResultClick(campaign_id, price, user_id)
                         } else if (action == 4) {
-                            const updateCampaignResultFullView = await model.updateCampaignResultFullView(campaign_id, price, user_id)
-
-                            if (updateCampaignResultFullView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.updateCampaignResultFullView(campaign_id, price, user_id)
                         }
                     }
                 } else {
-                    currentHours += 23
-                    const calculateTime = currentHours - lastHour
+                    let hours = currentHours + 23
+                    const calculateTime = hours - lastHour
 
                     const calculateCTR = Math.floor((findCampaign.clicks_count / findCampaign.views_count) * 100)
                     await model.updateCampaignCtr(campaign_id, calculateCTR)
@@ -197,92 +126,21 @@ module.exports = {
                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                         `
                         if (action == 2) {
-                            const addCampaignResultView = await model.addCampaignResultView(time, campaign_id, price, user_id)
-
-                            if (addCampaignResultView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.addCampaignResultView(time, campaign_id, price, user_id)
                         } else if (action == 3) {
-                            const addCampaignResultClick = await model.addCampaignResultClick(time, campaign_id, price, user_id)
-
-                            if (addCampaignResultClick) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.addCampaignResultClick(time, campaign_id, price, user_id)
                         } else if (action == 4) {
-                            const addCampaignResultFullView = await model.addCampaignResultFullView(time, campaign_id, price, user_id)
-
-                            if (addCampaignResultFullView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.addCampaignResultFullView(time, campaign_id, price, user_id)
                         }
 
                     } else {
                         if (action == 2) {
-                            const updateCampaignResultView = await model.updateCampaignResultView(campaign_id, price, user_id)
+                            await model.updateCampaignResultView(campaign_id, price, user_id)
 
-                            if (updateCampaignResultView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
                         } else if (action == 3) {
-                            const updateCampaignResultClick = await model.updateCampaignResultClick(campaign_id, price, user_id)
-
-                            if (updateCampaignResultClick) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.updateCampaignResultClick(campaign_id, price, user_id)
                         } else if (action == 4) {
-                            const updateCampaignResultFullView = await model.updateCampaignResultFullView(campaign_id, price, user_id)
-
-                            if (updateCampaignResultFullView) {
-                                return res.json({
-                                    status: 200,
-                                    message: "Success"
-                                })
-                            } else {
-                                return res.json({
-                                    status: 400,
-                                    message: "Bad request"
-                                })
-                            }
+                            await model.updateCampaignResultFullView(campaign_id, price, user_id)
                         }
                     }
                 }
@@ -292,58 +150,20 @@ module.exports = {
                         ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                     `
                 if (action == 2) {
-                    const addCampaignResultView = await model.addCampaignResultView(time, campaign_id, price, user_id)
-
-                    if (addCampaignResultView) {
-                        return res.json({
-                            status: 200,
-                            message: "Success"
-                        })
-                    } else {
-                        return res.json({
-                            status: 400,
-                            message: "Bad request"
-                        })
-                    }
+                    await model.addCampaignResultView(time, campaign_id, price, user_id)
                 } else if (action == 3) {
-                    const addCampaignResultClick = await model.addCampaignResultClick(time, campaign_id, price, user_id)
-
-                    if (addCampaignResultClick) {
-                        return res.json({
-                            status: 200,
-                            message: "Success"
-                        })
-                    } else {
-                        return res.json({
-                            status: 400,
-                            message: "Bad request"
-                        })
-                    }
+                    await model.addCampaignResultClick(time, campaign_id, price, user_id)
                 } else if (action == 4) {
-                    const addCampaignResultFullView = await model.addCampaignResultFullView(time, campaign_id, price, user_id)
-
-                    if (addCampaignResultFullView) {
-                        return res.json({
-                            status: 200,
-                            message: "Success"
-                        })
-                    } else {
-                        return res.json({
-                            status: 400,
-                            message: "Bad request"
-                        })
-                    }
+                    await model.addCampaignResultFullView(time, campaign_id, price, user_id)
                 }
             }
-
-            // -----------------------------------------------------
 
             if (findApp) {
                 const lastDate = findApp?.date.split(',')
                 const lastHour = Number(lastDate[0])
                 const lastMonth = Number(lastDate[1] - 1)
                 const lastDay = Number(lastDate[2])
-
+                console.log(lastDate);
 
                 if (currentDay == lastDay) {
                     const calculateTime = Number(currentHours - lastHour)
@@ -443,8 +263,8 @@ module.exports = {
                         }
                     }
                 } else {
-                    currentHours += 23
-                    const calculateTime = currentHours - lastHour
+                    let hours = currentHours + 23
+                    const calculateTime = hours - lastHour
                     let time = `
                             ${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}
                          `

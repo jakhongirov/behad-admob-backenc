@@ -345,7 +345,7 @@ const filterUsers = (gender, max_age, min_age, phone_lang, interest, country, ci
             ((user_phone_lang = '${phone_lang.toUpperCase()}') or ('${phone_lang.toUpperCase()}' = 'all')) and 
             ((user_country = '${country.toUpperCase()}') or ('${country.toLowerCase()}' = 'all')) and 
             ((user_capital = '${city}') or ('${city.toLowerCase()}' = 'all')) and 
-            (( '${interest.toLowerCase()}' = ANY (user_device_id) ) or ('${interest.toLowerCase()}' = 'all'));
+            (( '${interest.toLowerCase()}' = ANY (user_interest) ) or ('${interest.toLowerCase()}' = 'all'));
     `;
 
     return fetch(FILTER_USER_COUNT)

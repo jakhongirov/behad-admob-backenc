@@ -76,7 +76,7 @@ const UPDATE_APP_RESULT_REQUEST = `
         action_result
     SET
         user_id = ARRAY_APPEND(user_id, $2),
-        request_count = views_count + 1
+        request_count = request_count + 1
     WHERE
         app_ads_id = $1
     RETURNING *;

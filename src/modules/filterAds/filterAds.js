@@ -45,8 +45,8 @@ module.exports = {
                                         await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
-                                    currentHours += 23
-                                    const calculateTime = currentHours - lastHour
+                                    let hours = currentHours + 23
+                                    const calculateTime = hours - lastHour
 
                                     if (calculateTime >= 3) {
                                         let time = `
@@ -113,8 +113,8 @@ module.exports = {
                                         await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
-                                    currentHours += 23
-                                    const calculateTime = currentHours - lastHour
+                                    let hours = currentHours + 23
+                                    const calculateTime = hours - lastHour
 
                                     if (calculateTime >= 3) {
                                         let time = `
@@ -181,8 +181,8 @@ module.exports = {
                                         await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
-                                    currentHours += 23
-                                    const calculateTime = currentHours - lastHour
+                                    let hours = currentHours + 23
+                                    const calculateTime = hours - lastHour
 
                                     if (calculateTime >= 3) {
                                         let time = `
@@ -252,8 +252,8 @@ module.exports = {
                                         await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
-                                    currentHours += 23
-                                    const calculateTime = currentHours - lastHour
+                                    let hours = currentHours + 23
+                                    const calculateTime = hours - lastHour
 
                                     if (calculateTime >= 3) {
                                         let time = `
@@ -318,8 +318,8 @@ module.exports = {
                                         await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
-                                    currentHours += 23
-                                    const calculateTime = currentHours - lastHour
+                                    let hours = currentHours + 23
+                                    const calculateTime = hours - lastHour
 
                                     if (calculateTime >= 3) {
                                         let time = `
@@ -384,8 +384,8 @@ module.exports = {
                                         await model.updateAppResultRequest(adId, deviceId)
                                     }
                                 } else {
-                                    currentHours += 23
-                                    const calculateTime = currentHours - lastHour
+                                    let hours = currentHours + 23
+                                    const calculateTime = hours - lastHour
 
                                     if (calculateTime >= 3) {
                                         let time = `
@@ -455,8 +455,8 @@ module.exports = {
                                     await model.updateAppResultRequest(adId, deviceId)
                                 }
                             } else {
-                                currentHours += 23
-                                const calculateTime = currentHours - lastHour
+                                let hours = currentHours + 23
+                                const calculateTime = hours - lastHour
 
                                 if (calculateTime >= 3) {
                                     let time = `
@@ -521,8 +521,8 @@ module.exports = {
                                     await model.updateAppResultRequest(adId, deviceId)
                                 }
                             } else {
-                                currentHours += 23
-                                const calculateTime = currentHours - lastHour
+                                let hours = currentHours + 23
+                                const calculateTime = hours - lastHour
 
                                 if (calculateTime >= 3) {
                                     let time = `
@@ -588,8 +588,8 @@ module.exports = {
                                     await model.updateAppResultRequest(adId, deviceId)
                                 }
                             } else {
-                                currentHours += 23
-                                const calculateTime = currentHours - lastHour
+                                let hours = currentHours + 23
+                                const calculateTime = hours - lastHour
 
                                 if (calculateTime >= 3) {
                                     let time = `
