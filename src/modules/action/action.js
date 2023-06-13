@@ -34,6 +34,8 @@ module.exports = {
             const currentMinutes = Number(currentDate.getMinutes())
             const currentDay = Number(currentDate.getDate())
 
+            console.log(currentHours);
+
             if (action == 2 && ad.type_of_campaign.toLowerCase() === 'view') {
                 price = price + ad.action_price
             } else if (action == 3 && ad.type_of_campaign.toLowerCase() === 'click') {
