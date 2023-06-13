@@ -201,5 +201,6 @@ module.exports = {
     updateStatus,
     deleteApp,
     foundUser,
-    getAppResult
+    getAppResult,
+    appList
 }
