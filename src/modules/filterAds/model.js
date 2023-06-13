@@ -15,7 +15,7 @@ const CHOOSE_ALL = `
     FROM
         advertisements
     WHERE  
-        advertisement_type = $1 and advertisement_active = true
+        advertisement_type = $1 and advertisement_active = true and $2 = any (advertisement_app_id)
     ORDER BY random()
     LIMIT 1;
 `;
@@ -83,7 +83,7 @@ const UPDATE_APP_RESULT_REQUEST = `
 `
 
 const foundUser = (deviceId) => fetch(FOUND_USER, deviceId)
-const foundAd = (age, who, country, city, phone_lang, type) => {
+const foundAd = (age, who, country, city, phone_lang, type, app_id) => {
     const FOUND_AD = `
         SELECT 
             *
@@ -96,14 +96,15 @@ const foundAd = (age, who, country, city, phone_lang, type) => {
             ( max_age >= ${age} or ${age} >= min_age ) and
             ( country ilike '%${country}%' or country = 'all' ) and
             ( city ilike '%${city}%' or city = 'all' ) and
-            (  phone_lang ilike '%${phone_lang}%' or phone_lang = 'all' )
+            ( phone_lang ilike '%${phone_lang}%' or phone_lang = 'all' ) and
+            ( ${Number(app_id)} = any (advertisement_app_id))
         ORDER BY random()
         LIMIT 1;
     `;
 
     return fetch(FOUND_AD)
 }
-const chooseAllAd = (type) => fetch(CHOOSE_ALL, type)
+const chooseAllAd = (type, app_id) => fetch(CHOOSE_ALL, type)
 const foundApp = (adId) => fetch(FOUND_APP, adId)
 const foundAppResult = (adId) => fetch(FOUND_APP_RESULT, adId)
 const updateStatusAd = (campaign_id) => fetch(UPDATE_STATUS_AD, campaign_id)

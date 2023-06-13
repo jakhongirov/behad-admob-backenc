@@ -13,7 +13,7 @@ module.exports = {
             const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
             if (foundUser) {
-                const foundAd = await model.foundAd(foundUser.user_age, foundUser.user_who, foundUser.user_country, foundUser.user_capital, foundUser.user_phone_lang, type,)
+                const foundAd = await model.foundAd(foundUser.user_age, foundUser.user_who, foundUser.user_country, foundUser.user_capital, foundUser.user_phone_lang, type, app.app_id)
 
                 if (foundAd) {
                     if (foundAd?.type_of_campaign.toLowerCase() === 'view') {
@@ -222,7 +222,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    const chooseAllAd = await model.chooseAllAd(type)
+                    const chooseAllAd = await model.chooseAllAd(type, app.app_id)
 
                     if (chooseAllAd?.type_of_campaign.toLowerCase() === 'view') {
                         let result = 0
@@ -425,7 +425,7 @@ module.exports = {
                     }
                 }
             } else {
-                const chooseAllAd = await model.chooseAllAd(type)
+                const chooseAllAd = await model.chooseAllAd(type, app.app_id)
 
                 if (chooseAllAd?.type_of_campaign.toLowerCase() === 'view') {
                     let result = 0
@@ -470,7 +470,7 @@ module.exports = {
                         } else {
                             const lastHour = Number(currentHours) + 3
                             let time = `
-                                    ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 24 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
+                                    ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()} - ${lastHour > 23 ? currentDay + 1 : currentDay} ${month[currentDate.getMonth()]} ${lastHour > 24 ? lastHour : lastHour - 24}:${currentDate.getMinutes()}
                             `
                             await model.addAppResultRequest(time, adId, deviceId)
                         }

@@ -148,6 +148,7 @@ module.exports = {
                 advertisement_click_link,
                 advertisement_media_type,
                 advertisement_action_text,
+                app_id,
                 advertising_id
             } = req.body
 
@@ -187,6 +188,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -228,6 +230,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -269,6 +272,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -312,6 +316,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -354,6 +359,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -404,6 +410,7 @@ module.exports = {
                 advertisement_click_link,
                 advertisement_media_type,
                 advertisement_action_text,
+                app_id,
                 advertising_id
             } = req.body
 
@@ -452,6 +459,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -494,6 +502,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -536,6 +545,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -580,6 +590,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
@@ -623,6 +634,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
+                    app_id,
                     advertising_id
                 )
 
