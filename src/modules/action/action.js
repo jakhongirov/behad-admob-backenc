@@ -30,11 +30,8 @@ module.exports = {
             const findApp = await model.foundAppResult(app_ads_id)
             let price = 0;
             const currentDate = new Date
-            const currentHours = Number(currentDate.getHours())
-            const currentMinutes = Number(currentDate.getMinutes())
+            const currentHours = Number(currentDate.getHours() + 5)
             const currentDay = Number(currentDate.getDate())
-
-            console.log(currentHours);
 
             if (action == 2 && ad.type_of_campaign.toLowerCase() === 'view') {
                 price = price + ad.action_price
@@ -51,7 +48,7 @@ module.exports = {
                 const lastDay = Number(lastDate[2])
 
                 if (currentDay == lastDay) {
-                    const calculateTime = Number(currentMinutes - lastHour)
+                    const calculateTime = Number(currentHours - lastHour)
 
                     if (calculateTime >= 3) {
                         let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
@@ -96,7 +93,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    let hours = currentMinutes + 59
+                    let hours = currentHours + 23
                     const calculateTime = hours - lastHour
 
                     if (calculateTime >= 3) {
@@ -163,7 +160,7 @@ module.exports = {
                 const lastDay = Number(lastDate[2])
 
                 if (currentDay == lastDay) {
-                    const calculateTime = Number(currentMinutes - lastHour)
+                    const calculateTime = Number(currentHours - lastHour)
 
                     if (calculateTime >= 3) {
                         let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
@@ -258,7 +255,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    let hours = currentMinutes + 59
+                    let hours = currentHours + 23
                     const calculateTime = hours - lastHour
                     let time = `${lastDay} ${month[lastMonth]} ${lastHour}:${currentDate.getMinutes()} - ${currentDay} ${month[currentDate.getMonth()]} ${currentHours}:${currentDate.getMinutes()}`
 
