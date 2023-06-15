@@ -104,7 +104,7 @@ const UPDATE_ADVERTISEMENT = `
         advertisement_media_type = $22,
         advertisement_media_name = $23,
         advertisement_action_text = $24,
-        advertisement_app_id = ARRAY $25
+        advertisement_app_id = ARRAY $25,
         advertising_id = $26
     WHERE
         campaign_id = $1
