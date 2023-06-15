@@ -161,9 +161,14 @@ module.exports = {
                 image_url = `https://ads.adstar.uz/public/images/${uploadPhoto.filename}`;
             }
 
-            const advertisement_pending_audince = await model.filterUsers(gender, max_age, min_age, phone_lang, interest, country, city)
+            const appId = app_id.split(',')
+            const advertisement_app_id = []
 
-            console.log(app_id);
+            for (let i = 0; i < appId.length; i++) {
+                advertisement_app_id.push(Number(appId[i]))
+            }
+
+            const advertisement_pending_audince = await model.filterUsers(gender, max_age, min_age, phone_lang, interest, country, city)
 
             if (action_price && advertisement_limit && advertisement_budget) {
                 const addAdvertisement = await model.addAdvertisement(
@@ -190,7 +195,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -232,7 +237,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -274,7 +279,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -318,7 +323,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -361,7 +366,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -420,6 +425,13 @@ module.exports = {
             let image_name = "";
             let image_url = "";
 
+            const appId = app_id.split(',')
+            const advertisement_app_id = []
+
+            for (let i = 0; i < appId.length; i++) {
+                advertisement_app_id.push(Number(appId[i]))
+            }
+
             const foundAd = await model.foundAd(campaign_id)
             const deleteOldLogo = await new FS(path.resolve(__dirname, '..', '..', '..', 'public', 'images', `${foundAd?.advertisement_media_name}`))
 
@@ -461,7 +473,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -504,7 +516,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -547,7 +559,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -592,7 +604,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -636,7 +648,7 @@ module.exports = {
                     advertisement_media_type,
                     image_name,
                     advertisement_action_text,
-                    app_id,
+                    advertisement_app_id,
                     advertising_id
                 )
 
@@ -693,13 +705,13 @@ module.exports = {
 
     PUT_STATUS: async (req, res) => {
         try {
-            const {campaign_id, status} = req.body
+            const { campaign_id, status } = req.body
             const foundAd = await model.foundAd(campaign_id)
 
-            if(foundAd) {
+            if (foundAd) {
                 const updateStatus = await model.updateStatus(campaign_id, status)
 
-                if(updateStatus) {
+                if (updateStatus) {
                     return res.json({
                         status: 200,
                         message: "Success"
