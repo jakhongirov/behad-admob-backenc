@@ -72,7 +72,7 @@ const ADD_ADVERTISEMENT = `
             $21,
             $22,
             $23,
-            ARRAY $24,
+            $24,
             $25
     ) RETURNING *;
 `;
