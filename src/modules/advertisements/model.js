@@ -45,7 +45,7 @@ const ADD_ADVERTISEMENT = `
             advertisement_media_type,
             advertisement_media_name,
             advertisement_action_text,
-            app_id,
+            advertisement_app_id,
             advertising_id
         )
     VALUES (
