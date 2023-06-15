@@ -93,13 +93,13 @@ CREATE TABLE action_result_campaign (
     action_result_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 
--- CREATE TABLE action_temp (
---     action_temp_id bigserial PRiMARY KEY,
---     app_id int not null REFERENCES apps_side(app_id) ON DELETE CASCADE,
---     app_ads_id text not null,
---     campaign_id int not null REFERENCES advertisements(campaign_id) ON DELETE CASCADE,
---     actions int not null,
---     action_price DOUBLE PRECISION not null,
---     user_id text not null,
---     action_temp_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
--- );
+CREATE TABLE action_temp (
+    action_temp_id bigserial PRiMARY KEY,
+    app_id int not null REFERENCES apps_side(app_id) ON DELETE CASCADE,
+    app_ads_id text not null,
+    campaign_id int not null REFERENCES advertisements(campaign_id) ON DELETE CASCADE,
+    actions int not null,
+    action_price DOUBLE PRECISION not null,
+    user_id text not null,
+    action_temp_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
+);

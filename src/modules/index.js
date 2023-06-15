@@ -40,6 +40,7 @@ router
     .delete('/deleteAdvertisement', advertisement.DELETE)
 
     .get('/action', action.GET)
+    .get('/start', action.USE_SCHEDULE)
     .post('/addAction', action.POST)
 
     .get('/filterAd', filterAd.GET)

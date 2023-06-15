@@ -15,8 +15,15 @@ const CHOOSE_ALL = `
     FROM
         advertisements
     WHERE  
-        advertisement_type = $1 and advertisement_active = true and $2 = any (advertisement_app_id)
-    ORDER BY random()
+        advertisement_type = $1 and 
+        advertisement_active = true and 
+        $2 = any (advertisement_app_id) and
+        gender = 'all' and
+        ( max_age >= 20 or 20 >= min_age ) and
+        country = 'all' and
+        city = 'all'  and
+        phone_lang = 'all'
+    ORDER BY action_price desc
     LIMIT 1;
 `;
 
@@ -42,45 +49,25 @@ const UPDATE_STATUS_AD = `
     RETURNING *;
 `;
 
-const FOUND_APP_RESULT = `
-    SELECT
-        *, to_char(action_result_create_date at time zone 'Asia/Tashkent', 'HH24,MM,DD') as date
-    FROM
-        action_result
-    WHERE
-        app_ads_id = $1
-    ORDER BY
-        action_result_create_date DESC
-    LIMIT 1;
-`;
-
-const ADD_APP_RESULT_REQUEST = `
-    INSERT INTO 
-        action_result (
-            action_result_time,
+const ADD_ACTION_TEMP = `
+    INSERT INTO
+        action_temp (
+            app_id,
             app_ads_id,
+            campaign_id,
+            actions,
             user_id,
-            request_count
+            action_price
         )
     VALUES (
         $1,
         $2,
-        ARRAY [$3],
-        1
-    )
-    RETURNING *;
-`
-
-const UPDATE_APP_RESULT_REQUEST = `
-    UPDATE
-        action_result
-    SET
-        user_id = ARRAY_APPEND(user_id, $2),
-        request_count = request_count + 1
-    WHERE
-        app_ads_id = $1
-    RETURNING *;
-`
+        $3,
+        1,
+        $4,
+        0
+    ) RETURNING *;
+`;
 
 const foundUser = (deviceId) => fetch(FOUND_USER, deviceId)
 const foundAd = (age, who, country, city, phone_lang, type, app_id) => {
@@ -98,7 +85,7 @@ const foundAd = (age, who, country, city, phone_lang, type, app_id) => {
             ( city ilike '%${city}%' or city = 'all' ) and
             ( phone_lang ilike '%${phone_lang}%' or phone_lang = 'all' ) and
             ( ${Number(app_id)} = any (advertisement_app_id))
-        ORDER BY random()
+        ORDER BY action_price desc
         LIMIT 1;
     `;
 
@@ -106,10 +93,8 @@ const foundAd = (age, who, country, city, phone_lang, type, app_id) => {
 }
 const chooseAllAd = (type, app_id) => fetch(CHOOSE_ALL, type, app_id)
 const foundApp = (adId) => fetch(FOUND_APP, adId)
-const foundAppResult = (adId) => fetch(FOUND_APP_RESULT, adId)
 const updateStatusAd = (campaign_id) => fetch(UPDATE_STATUS_AD, campaign_id)
-const addAppResultRequest = (time, adId, user_id) => fetch(ADD_APP_RESULT_REQUEST, time, adId, user_id)
-const updateAppResultRequest = (adId, user_id) => fetch(UPDATE_APP_RESULT_REQUEST, adId, user_id)
+const addAction = (app_id, adId, campaign_id, user_id) => fetch(ADD_ACTION_TEMP, app_id, adId, campaign_id, user_id)
 
 module.exports = {
     foundUser,
@@ -117,7 +102,5 @@ module.exports = {
     chooseAllAd,
     foundApp,
     updateStatusAd,
-    addAppResultRequest,
-    updateAppResultRequest,
-    foundAppResult
+    addAction
 }

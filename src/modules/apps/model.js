@@ -113,7 +113,7 @@ const APP_LIST = `
         app_name
     FROM
         apps_side
-    ORDER BY'
+    ORDER BY
         app_id
 `
 
