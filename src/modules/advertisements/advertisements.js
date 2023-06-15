@@ -163,6 +163,8 @@ module.exports = {
 
             const advertisement_pending_audince = await model.filterUsers(gender, max_age, min_age, phone_lang, interest, country, city)
 
+            console.log(app_id);
+
             if (action_price && advertisement_limit && advertisement_budget) {
                 const addAdvertisement = await model.addAdvertisement(
                     campaign_name,
