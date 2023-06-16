@@ -67,6 +67,7 @@ module.exports = {
         schedule.scheduleJob('*/4 * * * *', async () => {
             try {
                 if (check) {
+                    check = false
                     const actionTemp = await model.actionTemp()
                     const actionTempCampaign = await model.actionTempCampaign()
                     const actionTempUsers = await model.actionTempUsers()
@@ -183,7 +184,7 @@ module.exports = {
                 })
             } finally {
                 await model.clearActionTemp()
-                check = false
+                check = true
             }
         });
 
