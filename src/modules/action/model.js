@@ -289,6 +289,16 @@ const CAMPAIGN_ACTION_RESULT = `
         campaign_id = $1
 `
 
+const CAMPAIGN_CTR = `
+    SELECT
+        campaign_id
+    FROM
+        advertisements
+    WHERE
+        lower(advertisement_ctr::text) ilike $2 and 
+        campaign_id = $1
+`
+
 const actionTemp = () => fetchALL(ACTIONS_TEMP)
 const actionTempCampaign = () => fetchALL(ACTIONS_TEMP_CAMPAIGN)
 const actionTempPriceCount = (id) => fetchALL(ACTIONS_TEMP_PRICE_COUNT, id)
@@ -346,6 +356,7 @@ const actionTempCampaignUsers = () => fetchALL(ACTON_TEMP_CAMPAIGN_USER_ID)
 const addActionAppAdsUserId = (id, user_id) => fetch(ADD_ACTION_APP_ADS_USER_ID, id, user_id)
 const addActionsCampaignUserId = (id, user_id) => fetch(ADD_ACTION_CAMPAIGN_USER_ID, id, user_id)
 const findCampaignAction = (id, time) => fetch(CAMPAIGN_ACTION_RESULT, id, `%${time}%`)
+const findCampaignCTR = (id, time) => fetch(CAMPAIGN_CTR, id, `%${time}%`)
 
 module.exports = {
     actionTemp,
@@ -376,5 +387,6 @@ module.exports = {
     actionTempCampaignUsers,
     addActionAppAdsUserId,
     addActionsCampaignUserId,
-    findCampaignAction
+    findCampaignAction,
+    findCampaignCTR
 }
