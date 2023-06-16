@@ -349,7 +349,7 @@ const filterUsers = (gender, max_age, min_age, phone_lang, interest, country, ci
         WHERE
             ((user_who = '${gender.toLowerCase()}') or ('${gender.toLowerCase()}' != 'erkak' and '${gender.toLowerCase()}' != 'ayol' )) and
             (user_age >= ${min_age} and user_age <= ${max_age}) and
-            ((user_phone_lang = '${phone_lang.toUpperCase()}') or ('${phone_lang.toUpperCase()}' = 'all')) and 
+            ((user_phone_lang = '${phone_lang.toUpperCase()}') or ('${phone_lang.toLowerCase()}' = 'all')) and 
             ((user_country = '${country.toUpperCase()}') or ('${country.toLowerCase()}' = 'all')) and 
             ((user_capital = '${city}') or ('${city.toLowerCase()}' = 'all')) and 
             (( '${interest.toLowerCase()}' = ANY (user_interest) ) or ('${interest.toLowerCase()}' = 'all'));

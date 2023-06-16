@@ -63,7 +63,7 @@ module.exports = {
 
     USE_SCHEDULE: async (_, res) => {
 
-        schedule.scheduleJob('0 */3 * * *', async () => {
+        schedule.scheduleJob('*/2 * * * *', async () => {
             try {
                 const actionTemp = await model.actionTemp()
                 const actionTempCampaign = await model.actionTempCampaign()
@@ -72,8 +72,13 @@ module.exports = {
                 const currDate = new Date();
                 const currHours = currDate.getHours() + 5
                 const currMinutes = currDate.getMinutes()
+                const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const monthName = month[currDate.getMonth()]
+                const year = currDate.getFullYear()
+                const day = currDate.getDate()
                 const lastHour = Number(currHours) - 3
-                const time = `${lastHour > 0 ? lastHour : lastHour + 24}:${currMinutes} - ${currHours}:${currMinutes}`
+
+                const time = `${lastHour > 0 ? day : day - 1} ${monthName} ${year}  ${lastHour > 0 ? lastHour : lastHour + 24}:${currMinutes} - ${day} ${monthName} ${year} ${currHours}:${currMinutes}`
 
                 for (let i = 0; i < actionTemp.length; i++) {
 
@@ -138,7 +143,11 @@ module.exports = {
                     fullView['time'] = time
                     fullView['count'] = actionResultCampaign[i].full_views
 
-                    await model.updateAdsCount(actionResultCampaign[i].campaign_id, view, click, fullView)
+                    const result = await model.findCampaignAction(actionResultCampaign[i].campaign_id, time)
+
+                    if (!result) {
+                        await model.updateAdsCount(actionResultCampaign[i].campaign_id, view, click, fullView)
+                    }
                 }
 
                 const actionResultCampaignCtr = await model.actionResultCampaignCtr()
