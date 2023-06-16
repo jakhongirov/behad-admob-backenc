@@ -81,7 +81,7 @@ module.exports = {
                     const day = currDate.getDate()
                     const lastHour = Number(currHours) - 3
 
-                    const time = `${lastHour > 0 ? day : day - 1} ${monthName} ${year}  ${lastHour > 0 ? lastHour : lastHour + 24}:${currMinutes} - ${day} ${monthName} ${year} ${currHours}:${currMinutes}`
+                    const time = `${lastHour > 0 ? day : day - 1} ${monthName} ${year}  ${lastHour > 0 ? lastHour : lastHour + 24}:${currMinutes} - ${day} ${monthName} ${year} ${currHours == 24 ? 0 : currHours}:${currMinutes}`
 
                     for (let i = 0; i < actionTemp.length; i++) {
 
