@@ -347,12 +347,12 @@ const filterUsers = (gender, max_age, min_age, phone_lang, interest, country, ci
         FROM
             users
         WHERE
-            ((user_who = '${gender.toLowerCase()}') or ('${gender.toLowerCase()}' != 'erkak' and '${gender.toLowerCase()}' != 'ayol' )) and
+            ((user_who ilike '%${gender.toLowerCase()}%') or ('${gender.toLowerCase()}' != 'erkak' and '${gender.toLowerCase()}' != 'ayol' )) and
             (user_age >= ${min_age} and user_age <= ${max_age}) and
-            ((user_phone_lang = '${phone_lang.toUpperCase()}') or ('${phone_lang.toLowerCase()}' = 'all')) and 
-            ((user_country = '${country.toUpperCase()}') or ('${country.toLowerCase()}' = 'all')) and 
-            ((user_capital = '${city}') or ('${city.toLowerCase()}' = 'all')) and 
-            (( '${interest.toLowerCase()}' = ANY (user_interest) ) or ('${interest.toLowerCase()}' = 'all'));
+            ((user_phone_lang ilike '%${phone_lang}%') or ('${phone_lang.toLowerCase()}' = 'all')) and 
+            ((user_country ilike '%${country}%') or ('${country.toLowerCase()}' = 'all')) and 
+            ((user_capital ilike '%${city}%') or ('${city.toLowerCase()}' = 'all')) and 
+            (( '%${interest}%' ilike ANY (user_interest) ) or ('${interest.toLowerCase()}' = 'all'));
     `;
 
     return fetch(FILTER_USER_COUNT)

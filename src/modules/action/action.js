@@ -64,7 +64,7 @@ module.exports = {
 
     USE_SCHEDULE: async (_, res) => {
 
-        schedule.scheduleJob('*/4 * * * *', async () => {
+        schedule.scheduleJob('0 */3 * * *', async () => {
             try {
                 if (check) {
                     check = false
