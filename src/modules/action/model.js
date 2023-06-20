@@ -168,25 +168,31 @@ const FOUND_ADS = `
             campaign_id = $1;
 `;
 
-const ACTION_RESULT_CAMPAIGN = `
-    SELECT 
-        campaign_id, 
-        sum(views_count)::int as views, 
-        sum(clicks_count)::int as click, 
-        sum(full_views_count)::int as full_views
-    FROM 
-        action_result_campaign 
-    group by 
-        campaign_id;
-`;
-
-const UPDATE_ADS_COUNT = `
+const UPDATE_ADS_VIEW_COUNT = `
     Update 
         advertisements 
     SET 
-        view = array_append(view, $2),
-        click = array_append(click, $3),
-        full_view = array_append(full_view, $4)
+        view = array_append(view, $2)
+    WHERE
+        campaign_id = $1
+    RETURNING *;
+`;
+
+const UPDATE_ADS_CLICK_COUNT = `
+    Update 
+        advertisements 
+    SET 
+        click = array_append(click, $2)
+    WHERE
+        campaign_id = $1
+    RETURNING *;
+`;
+
+const UPDATE_ADS_FULL_VIEW_COUNT = `
+    Update 
+        advertisements 
+    SET 
+        full_view = array_append(full_view, $2)
     WHERE
         campaign_id = $1
     RETURNING *;
@@ -216,6 +222,15 @@ const ADD_PRICE_CAMPAIGN_COUNT = `
     RETURNING *;
 `;
 
+const ACTION_RESULT_CAMPAIGN_IDS = `
+    SELECT 
+        campaign_id
+    FROM 
+        action_result_campaign 
+    group by 
+        campaign_id;
+`;
+
 const ACTIONS_RESULT_VIEW_CLICK_COUNT = `
     SELECT 
         campaign_id, 
@@ -223,8 +238,13 @@ const ACTIONS_RESULT_VIEW_CLICK_COUNT = `
         sum(clicks_count)::int as click
     FROM 
         action_result_campaign 
+    WHERE
+        campaign_id = $1
     group by 
-        campaign_id;
+        campaign_id
+    ORDER BY
+        action_result_create_date
+    LIMIT 1;
 `;
 
 const UPDATE_AD_CTR = `
@@ -347,9 +367,11 @@ const actionResult = () => fetchALL(ACTION_RESULT)
 const addActionTemp = (app_id, app_ads_id, action, campaign_id, user_id, price) => fetch(ADD_ACTION_TEMP, app_id, app_ads_id, action, campaign_id, user_id, price)
 const foundApp = (app_ads_id) => fetch(FOUND_APP, app_ads_id)
 const foundAds = (campaign_id) => fetch(FOUND_ADS, campaign_id)
-const actionResultCampaign = () => fetchALL(ACTION_RESULT_CAMPAIGN)
-const updateAdsCount = (id, view, click, fullView) => fetch(UPDATE_ADS_COUNT, id, view, click, fullView)
-const actionResultCampaignCtr = () => fetchALL(ACTIONS_RESULT_VIEW_CLICK_COUNT)
+const updateAdsViewCount = (id, view) => fetch(UPDATE_ADS_VIEW_COUNT, id, view)
+const updateAdsClickCount = (id, click) => fetch(UPDATE_ADS_CLICK_COUNT, id, click)
+const updateAdsFullViewCount = (id, fullView) => fetch(UPDATE_ADS_FULL_VIEW_COUNT, id, fullView)
+const actionResultCampaignIds = () =>fetchALL(ACTION_RESULT_CAMPAIGN_IDS)
+const actionResultCampaignCtr = (id) => fetchALL(ACTIONS_RESULT_VIEW_CLICK_COUNT,id)
 const updateAdCTR = (campaign_id, ctrObj) => fetch(UPDATE_AD_CTR, campaign_id, ctrObj)
 const actionTempUsers = () => fetchALL(ACTON_TEMP_USER_ID)
 const actionTempCampaignUsers = () => fetchALL(ACTON_TEMP_CAMPAIGN_USER_ID)
@@ -375,12 +397,14 @@ module.exports = {
     addActionTemp,
     foundApp,
     foundAds,
-    actionResultCampaign,
-    updateAdsCount,
+    updateAdsViewCount,
+    updateAdsClickCount,
+    updateAdsFullViewCount,
     addActionResultCampaignView,
     addActionResultCampaignCount,
     addActionResultCampaignClick,
     addActionResultCampaignFullView,
+    actionResultCampaignIds,
     actionResultCampaignCtr,
     updateAdCTR,
     actionTempUsers,

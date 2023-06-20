@@ -115,11 +115,24 @@ module.exports = {
                                 await model.addActionResultCampaignCount(actionTempCampaignPrice?.campaign_id, actionTempCampaignPrice?.sum)
 
                             }
+                            let view = {}
+                            view['time'] = time
+                            view['count'] = actionTempCampaign[i].count
+                            await model.updateAdsViewCount(actionTempCampaign[i].campaign_id, view)
 
                         } else if (actionTempCampaign[i].actions == 3) {
                             await model.addActionResultCampaignClick(actionTempCampaign[i].campaign_id, actionTempCampaign[i].count)
+                            let click = {}
+                            click['time'] = time
+                            click['count'] = actionTempCampaign[i].count
+                            await model.updateAdsClickCount(actionTempCampaign[i].campaign_id, click)
+
                         } else if (actionTemp[i].actions == 4) {
                             await model.addActionResultCampaignFullView(actionTempCampaign[i].campaign_id, actionTempCampaign[i].count)
+                            let fullView = {}
+                            fullView['time'] = time
+                            fullView['count'] = actionTempCampaign[i].count
+                            await model.updateAdsFullViewCount(actionTempCampaign[i].campaign_id, fullView)
                         }
                     }
 
@@ -130,46 +143,15 @@ module.exports = {
                         await model.addActionsCampaignUserId(actionTempCampaignUsers[i].campaign_id, actionTempCampaignUsers[i].user_id)
                     }
 
-                    const actionResultCampaign = await model.actionResultCampaign()
-
-                    for (let i = 0; i < actionResultCampaign.length; i++) {
-                        let view = {}
-                        let click = {}
-                        let fullView = {}
-
-                        view['time'] = time
-                        view['count'] = actionResultCampaign[i].views
-
-                        click['time'] = time
-                        click['count'] = actionResultCampaign[i].click
-
-                        fullView['time'] = time
-                        fullView['count'] = actionResultCampaign[i].full_views
-
-                        // const result = await model.findCampaignAction(actionResultCampaign[i].campaign_id, time)
-
-                        // if (!result) {
-                        //     await model.updateAdsCount(actionResultCampaign[i].campaign_id, view, click, fullView)
-                        // }
-
-                        await model.updateAdsCount(actionResultCampaign[i].campaign_id, view, click, fullView)
-                    }
-
-                    const actionResultCampaignCtr = await model.actionResultCampaignCtr()
-
-                    for (let i = 0; i < actionResultCampaignCtr?.length; i++) {
-                        const calcularedCTR = Math.floor((actionResultCampaignCtr[i].click / actionResultCampaignCtr[i].views) * 100)
+                    const actionResultCampaignIds = await model.actionResultCampaignIds()
+                    
+                    for (let i = 0; i < actionResultCampaignIds?.length; i++) {
+                        const actionResultCampaignCtr = await model.actionResultCampaignCtr(actionResultCampaignIds[i].campaign_id)
+                        const calcularedCTR = Math.floor((actionResultCampaignCtr?.click / actionResultCampaignCtr?.views) * 100)
                         let ctr = {}
 
                         ctr['time'] = time
                         ctr['precent'] = calcularedCTR
-
-
-                        // const result = await model.findCampaignCTR(actionResultCampaign[i].campaign_id, time)
-
-                        // // if (!result) {
-                        // //     await model.updateAdCTR(actionResultCampaignCtr[i].campaign_id, ctr)
-                        // // }
 
                         await model.updateAdCTR(actionResultCampaignCtr[i].campaign_id, ctr)
                     }
