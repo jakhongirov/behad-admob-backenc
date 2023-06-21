@@ -21,7 +21,14 @@ const BY_ID = `
 
 const BY_ID_EARNING = `
     SELECT
-        *, to_char(app_create_date at time zone 'Asia/Tashkent', 'HH24:MM/MM.DD.YYYY')
+        action_result_id,
+        action_result_time,
+        app_ads_id,
+        request_count,
+        views_count,
+        clicks_count,
+        full_views_count,
+        action_earning
     FROM 
         apps_side a
     INNER JOIN
@@ -186,7 +193,7 @@ const updateApp = (app_id, userId, appName, app_link, banner_id, inters_id, rewa
 const updateStatus = (app_id, category_id, status) => fetch(UPDATE_APP_STATUS, app_id, category_id, status)
 const deleteApp = (app_id) => fetch(DELETE_APP, app_id)
 const foundUser = (userId) => fetch(FOUND_USER, userId)
-const getAppResult = (appId) => fetch(BY_ID_EARNING, appId)
+const getAppResult = (appId) => fetchALL(BY_ID_EARNING, appId)
 const appList = () => fetchALL(APP_LIST)
 
 module.exports = {
