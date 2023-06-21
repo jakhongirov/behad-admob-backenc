@@ -235,15 +235,16 @@ const ACTIONS_RESULT_VIEW_CLICK_COUNT = `
     SELECT 
         campaign_id, 
         sum(views_count)::int as views, 
-        sum(clicks_count)::int as click
+        sum(clicks_count)::int as click,
+        sum(full_views_count)::int as full_view
     FROM 
         action_result_campaign 
     WHERE
         campaign_id = $1
     group by 
-        campaign_id
+        campaign_id, action_result_create_date
     ORDER BY
-        action_result_create_date
+        action_result_create_date desc
     LIMIT 1;
 `;
 
@@ -371,7 +372,7 @@ const updateAdsViewCount = (id, view) => fetch(UPDATE_ADS_VIEW_COUNT, id, view)
 const updateAdsClickCount = (id, click) => fetch(UPDATE_ADS_CLICK_COUNT, id, click)
 const updateAdsFullViewCount = (id, fullView) => fetch(UPDATE_ADS_FULL_VIEW_COUNT, id, fullView)
 const actionResultCampaignIds = () =>fetchALL(ACTION_RESULT_CAMPAIGN_IDS)
-const actionResultCampaignCtr = (id) => fetchALL(ACTIONS_RESULT_VIEW_CLICK_COUNT,id)
+const actionResultCampaignCtr = (id) => fetch(ACTIONS_RESULT_VIEW_CLICK_COUNT,id)
 const updateAdCTR = (campaign_id, ctrObj) => fetch(UPDATE_AD_CTR, campaign_id, ctrObj)
 const actionTempUsers = () => fetchALL(ACTON_TEMP_USER_ID)
 const actionTempCampaignUsers = () => fetchALL(ACTON_TEMP_CAMPAIGN_USER_ID)

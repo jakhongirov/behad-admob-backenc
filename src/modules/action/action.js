@@ -81,7 +81,7 @@ module.exports = {
                     const day = currDate.getDate()
                     const lastHour = Number(currHours) - 3
 
-                    const time = `${lastHour > 0 ? day : day - 1} ${monthName} ${year}  ${lastHour > 0 ? lastHour : lastHour + 24}:${currMinutes} - ${day} ${monthName} ${year} ${currHours == 24 ? 0 : currHours > 24 ? currHours - 24: currHours }:${currMinutes}`
+                    const time = `${lastHour > 0 ? day : day - 1} ${monthName} ${year}  ${lastHour > 0 ? lastHour : lastHour + 24}:${currMinutes} - ${day} ${monthName} ${year} ${currHours == 24 ? 0 : currHours > 24 ? currHours - 24 : currHours}:${currMinutes}`
 
                     for (let i = 0; i < actionTemp.length; i++) {
 
@@ -115,24 +115,11 @@ module.exports = {
                                 await model.addActionResultCampaignCount(actionTempCampaignPrice?.campaign_id, actionTempCampaignPrice?.sum)
 
                             }
-                            let view = {}
-                            view['time'] = time
-                            view['count'] = actionTempCampaign[i].count
-                            await model.updateAdsViewCount(actionTempCampaign[i].campaign_id, view)
 
                         } else if (actionTempCampaign[i].actions == 3) {
                             await model.addActionResultCampaignClick(actionTempCampaign[i].campaign_id, actionTempCampaign[i].count)
-                            let click = {}
-                            click['time'] = time
-                            click['count'] = actionTempCampaign[i].count
-                            await model.updateAdsClickCount(actionTempCampaign[i].campaign_id, click)
-
                         } else if (actionTemp[i].actions == 4) {
                             await model.addActionResultCampaignFullView(actionTempCampaign[i].campaign_id, actionTempCampaign[i].count)
-                            let fullView = {}
-                            fullView['time'] = time
-                            fullView['count'] = actionTempCampaign[i].count
-                            await model.updateAdsFullViewCount(actionTempCampaign[i].campaign_id, fullView)
                         }
                     }
 
@@ -144,16 +131,30 @@ module.exports = {
                     }
 
                     const actionResultCampaignIds = await model.actionResultCampaignIds()
-                    
+
                     for (let i = 0; i < actionResultCampaignIds?.length; i++) {
                         const actionResultCampaignCtr = await model.actionResultCampaignCtr(actionResultCampaignIds[i].campaign_id)
                         const calcularedCTR = Math.floor((actionResultCampaignCtr?.click / actionResultCampaignCtr?.views) * 100)
-                        let ctr = {}
 
+                        let ctr = {}
                         ctr['time'] = time
                         ctr['precent'] = calcularedCTR
+                        await model.updateAdCTR(actionResultCampaignCtr?.campaign_id, ctr)
 
-                        await model.updateAdCTR(actionResultCampaignCtr[i].campaign_id, ctr)
+                        let view = {}
+                        view['time'] = time
+                        view['count'] = actionResultCampaignCtr?.views
+                        await model.updateAdsViewCount(actionResultCampaignCtr?.campaign_id, view)
+
+                        let click = {}
+                        click['time'] = time
+                        click['count'] = actionResultCampaignCtr?.click
+                        await model.updateAdsClickCount(actionResultCampaignCtr?.campaign_id, click)
+
+                        let fullView = {}
+                        fullView['time'] = time
+                        fullView['count'] = actionResultCampaignCtr?.full_view
+                        await model.updateAdsFullViewCount(actionResultCampaignCtr?.campaign_id, fullView)
                     }
                 } else {
                     return ""
