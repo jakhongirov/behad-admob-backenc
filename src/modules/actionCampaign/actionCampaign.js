@@ -77,17 +77,17 @@ module.exports = {
             const foundAd = await model.foundAd(campaignId, userId)
 
             if (foundAd) {
-               const acntions = await model.foundCampaignActions(campaignId, limit, offset)
+               const actions = await model.foundCampaignActions(campaignId, limit, offset)
 
-               if (acntions) {
+               if (actions) {
                   return res.json({
                      status: 200,
                      message: "Success",
-                     data: acntions
+                     data: actions
                   })
                } else {
                   return res.json({
-                     status: 404,
+                     status: 400,
                      message: "Bad request"
                   })
                }
@@ -100,7 +100,57 @@ module.exports = {
 
          } else {
             return res.json({
-               status: 404,
+               status: 400,
+               message: "Bad request"
+            })
+         }
+
+      } catch (error) {
+         console.log(error)
+         res.json({
+            status: 500,
+            message: "Internal Server Error",
+         })
+      }
+   },
+
+   CAMPAIGN_ACTIONS_GRAPH: async (req, res) => {
+      try {
+         const { userId, campaignId, days } = req.query
+
+         if (userId && campaignId && days) {
+            const actionList = await model.actionListByCampaignId(userId, campaignId, days)
+
+            if (actionList) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: actionList
+               })
+            } else {
+               return res.json({
+                  status: 404,
+                  message: "Bad request"
+               })
+            }
+         } else if (userId && days) {
+            const actionList = await model.actionList(userId, days)
+
+            if (actionList) {
+               return res.json({
+                  status: 200,
+                  message: "Success",
+                  data: actionList
+               })
+            } else {
+               return res.json({
+                  status: 404,
+                  message: "Bad request"
+               })
+            }
+         } else {
+            return res.json({
+               status: 400,
                message: "Bad request"
             })
          }

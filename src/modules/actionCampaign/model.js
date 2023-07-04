@@ -49,7 +49,8 @@ const calculateActionCampaign = (userId, days) => {
          sum(a.views_count) as views, 
          sum(a.clicks_count) as clicks, 
          sum(a.full_views_count) as full_view, 
-         avg(a.campaign_ctr) as ctr
+         avg(a.campaign_ctr) as ctr,
+         sum(action_earning) as earning
       FROM
          action_result_campaign a
       INNER JOIN
@@ -68,7 +69,8 @@ const calculateActionCampaignById = (userId, campaignId, days) => {
          sum(a.views_count) as views, 
          sum(a.clicks_count) as clicks, 
          sum(a.full_views_count) as full_view, 
-         avg(a.campaign_ctr) as ctr
+         avg(a.campaign_ctr) as ctr,
+         sum(action_earning) as earning
       FROM
          action_result_campaign a
       INNER JOIN
@@ -82,11 +84,60 @@ const calculateActionCampaignById = (userId, campaignId, days) => {
    `;
    return fetch(CALCULATE_ACTION_CAMPAIGN, userId, campaignId)
 }
+const actionListByCampaignId = (userId, campaignId, days) => {
+   const ACTION_CAMPAIGN_LIST_BY_ID = `
+      SELECT
+         action_result_id,
+         action_result_time,
+         views_count,
+         clicks_count,
+         full_views_count,
+         campaign_ctr,
+         action_earning,
+         to_char(action_result_create_date, 'MON-DD-YYYY HH12:MIPM') as date
+      FROM
+         action_result_campaign a
+      INNER JOIN
+         advertisements b
+      ON 
+         a.campaign_id = b.campaign_id 
+      WHERE 
+         advertising_id = $1 and
+         campaign_id = $2 and
+         action_result_create_date > current_date - interval '${days} days';
+   `;
+   return fetch(ACTION_CAMPAIGN_LIST_BY_ID, userId, campaignId)
+}
+const actionList = (userId, days) => {
+   const ACTION_CAMPAIGN_LIST = `
+      SELECT
+         action_result_id,
+         action_result_time,
+         views_count,
+         clicks_count,
+         full_views_count,
+         campaign_ctr,
+         action_earning,
+         to_char(action_result_create_date, 'MON-DD-YYYY HH12:MIPM') as date
+      FROM
+         action_result_campaign a
+      INNER JOIN
+         advertisements b
+      ON 
+         a.campaign_id = b.campaign_id 
+      WHERE 
+         advertising_id = $1 and
+         action_result_create_date > current_date - interval '${days} days';
+   `;
+   return fetch(ACTION_CAMPAIGN_LIST, userId)
+}
 
 module.exports = {
    foundUser,
    calculateActionCampaign,
    foundAd,
    calculateActionCampaignById,
-   foundCampaignActions
+   foundCampaignActions,
+   actionListByCampaignId,
+   actionList
 }

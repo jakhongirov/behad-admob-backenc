@@ -45,9 +45,10 @@ router
     .post('/addAction', action.POST)
 
     .get('/actionCampaign', actionCampaign.CALCULATE_ACTION_CAMPAIGN)
+    .get('/actionCampaignList', actionCampaign.CAMPAIGN_ACTIONS_GRAPH)
 
     .get('/filterAd', filterAd.GET)
-    
+
     .get('/gplay', gplay.GET_GOOGLE_PLAY_APP);
 
 module.exports = router   
