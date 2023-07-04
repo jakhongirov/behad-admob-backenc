@@ -12,7 +12,8 @@ module.exports = {
 
                 if (foundAd) {
                     if (foundAd?.type_of_campaign.toLowerCase() === 'view') {
-                        let result = 0
+                        let result = 0;
+                        const foundUserId = foundAd?.user_id.filter(e => e == deviceId).length
 
                         if (foundAd.view && foundAd.view.length > 0) {
                             for (let i = 0; i < foundAd.view.length; i++) {
@@ -20,7 +21,7 @@ module.exports = {
                             }
                         }
 
-                        if (result < foundAd.advertisement_limit) {
+                        if (result < foundAd.advertisement_limit && foundUserId != foundAd?.click_per_user) {
                             await model.addAction(app?.app_id, adId, foundAd?.campaign_id, deviceId)
                             return res.json({
                                 status: 200,
@@ -43,6 +44,7 @@ module.exports = {
                         }
                     } else if (foundAd?.type_of_campaign.toLowerCase() === 'click') {
                         let result = 0
+                        const foundUserId = foundAd?.user_id.filter(e => e == deviceId).length
 
                         if (foundAd.click && foundAd.click.length > 0) {
                             for (let i = 0; i < foundAd.click.length; i++) {
@@ -50,7 +52,7 @@ module.exports = {
                             }
                         }
 
-                        if (result < foundAd.advertisement_limit) {
+                        if (result < foundAd.advertisement_limit && foundUserId != foundAd?.click_per_user) {
                             await model.addAction(app?.app_id, adId, foundAd?.campaign_id, deviceId)
                             return res.json({
                                 status: 200,
@@ -73,6 +75,7 @@ module.exports = {
                         }
                     } else if (foundAd?.type_of_campaign.toLowerCase() === 'fullView') {
                         let result = 0
+                        const foundUserId = foundAd?.user_id.filter(e => e == deviceId).length
 
                         if (foundAd.full_view && foundAd.full_view.length > 0) {
                             for (let i = 0; i < foundAd.full_view.length; i++) {
@@ -80,7 +83,7 @@ module.exports = {
                             }
                         }
 
-                        if (result < foundAd.advertisement_limit) {
+                        if (result < foundAd.advertisement_limit && foundUserId != foundAd?.click_per_user) {
                             await model.addAction(app?.app_id, adId, foundAd?.campaign_id, deviceId)
                             return res.json({
                                 status: 200,
@@ -107,6 +110,7 @@ module.exports = {
 
                     if (chooseAllAd?.type_of_campaign.toLowerCase() === 'view') {
                         let result = 0
+                        const foundUserId = chooseAllAd?.user_id.filter(e => e == deviceId).length
 
                         if (chooseAllAd.view && chooseAllAd.view.length > 0) {
                             for (let i = 0; i < chooseAllAd.view.length; i++) {
@@ -114,7 +118,7 @@ module.exports = {
                             }
                         }
 
-                        if (result < chooseAllAd.advertisement_limit) {
+                        if (result < chooseAllAd.advertisement_limit && foundUserId != chooseAllAd?.click_per_user) {
                             await model.addAction(app?.app_id, adId, chooseAllAd?.campaign_id, deviceId)
                             return res.json({
                                 status: 200,
@@ -137,6 +141,7 @@ module.exports = {
                         }
                     } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'click') {
                         let result = 0
+                        const foundUserId = chooseAllAd?.user_id.filter(e => e == deviceId).length
 
                         if (chooseAllAd.click && chooseAllAd.click.length > 0) {
                             for (let i = 0; i < chooseAllAd.click.length; i++) {
@@ -144,7 +149,7 @@ module.exports = {
                             }
                         }
 
-                        if (result < chooseAllAd.advertisement_limit) {
+                        if (result < chooseAllAd.advertisement_limit && foundUserId != chooseAllAd?.click_per_user) {
                             await model.addAction(app?.app_id, adId, chooseAllAd?.campaign_id, deviceId)
                             return res.json({
                                 status: 200,
@@ -167,6 +172,7 @@ module.exports = {
                         }
                     } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'fullView') {
                         let result = 0
+                        const foundUserId = chooseAllAd?.user_id.filter(e => e == deviceId).length
 
                         if (chooseAllAd.full_view && chooseAllAd.full_view.length > 0) {
                             for (let i = 0; i < chooseAllAd.full_view.length; i++) {
@@ -174,7 +180,7 @@ module.exports = {
                             }
                         }
 
-                        if (result < chooseAllAd.advertisement_limit) {
+                        if (result < chooseAllAd.advertisement_limit && foundUserId != chooseAllAd?.click_per_user) {
                             await model.addAction(app?.app_id, adId, chooseAllAd?.campaign_id, deviceId)
                             return res.json({
                                 status: 200,
@@ -202,6 +208,7 @@ module.exports = {
 
                 if (chooseAllAd?.type_of_campaign.toLowerCase() === 'view') {
                     let result = 0
+                    const foundUserId = chooseAllAd?.user_id.filter(e => e == deviceId).length
 
                     if (chooseAllAd.view && chooseAllAd.view.length > 0) {
                         for (let i = 0; i < chooseAllAd.view.length; i++) {
@@ -209,7 +216,7 @@ module.exports = {
                         }
                     }
 
-                    if (result < chooseAllAd.advertisement_limit) {
+                    if (result < chooseAllAd.advertisement_limit && foundUserId != chooseAllAd?.click_per_user) {
                         await model.addAction(app?.app_id, adId, chooseAllAd?.campaign_id, deviceId)
                         return res.json({
                             status: 200,
@@ -232,6 +239,7 @@ module.exports = {
                     }
                 } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'click') {
                     let result = 0
+                    const foundUserId = chooseAllAd?.user_id.filter(e => e == deviceId).length
 
                     if (chooseAllAd.click && chooseAllAd.click.length > 0) {
                         for (let i = 0; i < chooseAllAd.click.length; i++) {
@@ -239,7 +247,7 @@ module.exports = {
                         }
                     }
 
-                    if (result < chooseAllAd.advertisement_limit) {
+                    if (result < chooseAllAd.advertisement_limit && foundUserId != chooseAllAd?.click_per_user) {
                         await model.addAction(app?.app_id, adId, chooseAllAd?.campaign_id, deviceId)
                         return res.json({
                             status: 200,
@@ -262,6 +270,7 @@ module.exports = {
                     }
                 } else if (chooseAllAd?.type_of_campaign.toLowerCase() === 'fullView') {
                     let result = 0
+                    const foundUserId = chooseAllAd?.user_id.filter(e => e == deviceId).length
 
                     if (chooseAllAd.full_view && chooseAllAd.full_view.length > 0) {
                         for (let i = 0; i < chooseAllAd.full_view.length; i++) {
@@ -269,7 +278,7 @@ module.exports = {
                         }
                     }
 
-                    if (result < chooseAllAd.advertisement_limit) {
+                    if (result < chooseAllAd.advertisement_limit && foundUserId != chooseAllAd?.click_per_user) {
                         await model.addAction(app?.app_id, adId, chooseAllAd?.campaign_id, deviceId)
                         return res.json({
                             status: 200,

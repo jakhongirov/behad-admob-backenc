@@ -11,6 +11,7 @@ const advertisement = require('./advertisements/advertisements')
 const action = require('./action/action')
 const filterAd = require('./filterAds/filterAds')
 const gplay = require('./gplay/gplay')
+const actionCampaign = require('./actionCampaign/actionCampaign')
 
 router
     .post('/login', login.LOGIN)
@@ -42,6 +43,8 @@ router
     .get('/action', action.GET)
     .get('/start', action.USE_SCHEDULE)
     .post('/addAction', action.POST)
+
+    .get('/actionCampaign', actionCampaign.CALCULATE_ACTION_CAMPAIGN)
 
     .get('/filterAd', filterAd.GET)
     

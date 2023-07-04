@@ -317,8 +317,18 @@ const CAMPAIGN_CTR = `
         advertisements
     WHERE
         lower(advertisement_ctr::text) ilike $2 and 
-        campaign_id = $1
+        campaign_id = $1;
 `
+
+const ADD_USER_ID_TO_CAMPAIGN = `
+    UPDATE
+        advertisements
+    SET
+        user_id = array_append(user_id, $2)
+    WHERE
+        campaign_id = $1
+    RETURNING *;
+`;
 
 const actionTemp = () => fetchALL(ACTIONS_TEMP)
 const actionTempCampaign = () => fetchALL(ACTIONS_TEMP_CAMPAIGN)
@@ -380,6 +390,7 @@ const addActionAppAdsUserId = (id, user_id) => fetch(ADD_ACTION_APP_ADS_USER_ID,
 const addActionsCampaignUserId = (id, user_id) => fetch(ADD_ACTION_CAMPAIGN_USER_ID, id, user_id)
 const findCampaignAction = (id, time) => fetch(CAMPAIGN_ACTION_RESULT, id, `%${time}%`)
 const findCampaignCTR = (id, time) => fetch(CAMPAIGN_CTR, id, `%${time}%`)
+const addUserIdToCampaign = (campaign_id, user_id) => fetch(ADD_USER_ID_TO_CAMPAIGN, campaign_id, user_id)
 
 module.exports = {
     actionTemp,
@@ -413,5 +424,6 @@ module.exports = {
     addActionAppAdsUserId,
     addActionsCampaignUserId,
     findCampaignAction,
-    findCampaignCTR
+    findCampaignCTR,
+    addUserIdToCampaign
 }

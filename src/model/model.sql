@@ -64,6 +64,7 @@ CREATE TABLE advertisements (
     advertisement_active BOOLEAN DEFAULT false,
     advertisement_action_text text,
     advertisement_app_id int [],
+    user_id text [],
     advertisement_create_date timestamptz DEFAULT CURRENT_TIMESTAMP
 );
 

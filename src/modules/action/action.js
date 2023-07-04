@@ -186,10 +186,13 @@ module.exports = {
 
             if (action == 2 && ad.type_of_campaign.toLowerCase() === 'view') {
                 price = price + ad.action_price
+                await model.addUserIdToCampaign(campaign_id, user_id)
             } else if (action == 3 && ad.type_of_campaign.toLowerCase() === 'click') {
                 price = price + ad.action_price
+                await model.addUserIdToCampaign(campaign_id, user_id)
             } else if (action == 4 && ad.type_of_campaign.toLowerCase() === 'fullView') {
                 price = price + ad.action_price
+                await model.addUserIdToCampaign(campaign_id, user_id)
             }
 
             const addActionTemp = await model.addActionTemp(app.app_id, app_ads_id, action, campaign_id, user_id, price)
@@ -214,17 +217,5 @@ module.exports = {
                 message: "Internal Server Error",
             })
         }
-    },
-
-    // CALCULATE_ACTIONS: async () => {
-    //     try {
-
-    //     } catch (error) {
-    //         console.log(error)
-    //         res.json({
-    //             status: 500,
-    //             message: "Internal Server Error",
-    //         })  
-    //     }
-    // }
+    }
 }
